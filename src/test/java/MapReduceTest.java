@@ -23,7 +23,6 @@ public class MapReduceTest {
 
     private final String testString = "100 200 1 12345678";
 
-    private UserAgent userAgent;
     @Before
     public void setUp() {
         HW1Mapper mapper = new HW1Mapper();
@@ -47,8 +46,8 @@ public class MapReduceTest {
         values.add(new IntWritable(1));
         values.add(new IntWritable(1));
         reduceDriver
-                .withInput(new Text(testString), values)
-                .withOutput(new Text(testString), new IntWritable(2))
+                .withInput(new Text("bot-left"), values)
+                .withOutput(new Text("bot-left temperature-low"), new IntWritable(2))
                 .runTest();
     }
 
@@ -57,7 +56,7 @@ public class MapReduceTest {
         mapReduceDriver
                 .withInput(new LongWritable(), new Text(testString))
                 .withInput(new LongWritable(), new Text(testString))
-                .withOutput(new Text("bot-left"), new IntWritable(2))
+                .withOutput(new Text("bot-left temperature-low"), new IntWritable(2))
                 .runTest();
     }
 }

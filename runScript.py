@@ -35,6 +35,9 @@ f.close()
 print("--GENERATING END--")
 
 print("--MAPREDUCE START--")
+os.system("hdfs dfs -rm -r "+sys.argv[4])
 os.system("hdfs dfs -rm -r "+sys.argv[5])
+os.system("hdfs dfs -put "+sys.argv[4]+" "+sys.argv[4])
 os.system("yarn jar "+sys.argv[3]+" "+sys.argv[4]+" "+sys.argv[5])
 print("--MAPREDUCE END--")
+

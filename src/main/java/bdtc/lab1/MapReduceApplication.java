@@ -18,6 +18,9 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 @Log4j
 public class MapReduceApplication {
 
+    /**
+      * Запуск джобы
+      */
     public static void main(String[] args) throws Exception {
 
         if (args.length < 2) {
@@ -34,10 +37,11 @@ public class MapReduceApplication {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         job.setOutputFormatClass(SequenceFileOutputFormat.class);
+
+        // snappy сжатие
         SequenceFileOutputFormat.setOutputCompressionType(job, SequenceFile.CompressionType.BLOCK);
         SequenceFileOutputFormat.setCompressOutput(job, true);
         SequenceFileOutputFormat.setOutputCompressorClass(job, SnappyCodec.class);
-
 
         Path outputDirectory = new Path(args[1]);
         FileInputFormat.addInputPath(job, new Path(args[0]));
